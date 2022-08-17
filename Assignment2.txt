@@ -1,0 +1,93 @@
+import java.util.*;
+
+class Guesser{
+	
+	int guessNum;
+	public int guessNumber()
+	{
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Guesser, please guess the number between 1 and 20 !");
+		guessNum=scan.nextInt();
+		return guessNum;
+
+	}
+}
+	
+class Player{
+	int guessNum;
+	public int playerGuessNumber()
+	{
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Player, please guess the number !");
+		guessNum=scan.nextInt();
+		return guessNum;
+	}
+}
+
+class Umpire{
+	int numFromGuesser;
+	int numFromPlayer1;
+	int numFromPlayer2;
+	int numFromPlayer3;
+public int collectNumFromGuesser()
+	{
+		Guesser g =new Guesser();
+		numFromGuesser=g.guessNumber();
+		return numFromGuesser;
+	}
+
+	public void collectNumFromPlayer()
+	{
+		Player p1=new Player();
+		Player p2=new Player();
+		Player p3=new Player();
+		
+		numFromPlayer1=p1.playerGuessNumber();
+		numFromPlayer2=p2.playerGuessNumber();
+		numFromPlayer3=p3.playerGuessNumber();
+	}
+	
+	public void Compare()
+	{
+		if(numFromGuesser==numFromPlayer1)
+			
+		{ if(numFromGuesser==numFromPlayer2 && numFromGuesser==numFromPlayer3)
+			System.out.println("All players have guessed the number correctly !!");
+		else if(numFromGuesser==numFromPlayer2)
+			System.out.println("Player 1 and Player 2 are the winner !!");
+		else if(numFromGuesser==numFromPlayer3)
+			System.out.println("Player 1 and Player 3 are the winner !!");
+		else
+			System.out.println("Player 1 is the winner !!");
+		}
+		
+		else if(numFromGuesser==numFromPlayer2)
+		{
+			if (numFromGuesser==numFromPlayer3)
+			System.out.println("Player 2 and Player 3 are the winner !!");
+			else
+			System.out.println("Player 2 is the winner !!");
+		}
+		else if(numFromGuesser==numFromPlayer3)
+			System.out.println("Player 3 is the winner !!");
+		else
+			System.out.println("No player guessed the number correctly, try again !!");
+	}
+}
+
+public class Launchgame {
+
+	public static void main(String[] args) {
+	
+		Umpire u = new Umpire();
+		int guess=u.collectNumFromGuesser();
+		if(guess>=1&&guess<=20) // added feature to limit the number that Guesser can guess
+		{
+		u.collectNumFromPlayer();
+		u.Compare();
+		}
+		else
+		System.out.println("Incorrect number! Please guess the number between 1 and 20 and try again.");
+		
+	}
+}
